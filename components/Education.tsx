@@ -22,7 +22,7 @@ const EducationData: EducationItem[] = [
     endDate: "2022",
     schoolName: "Sri Chaitanya Jr Kalasala",
     address: "Hyderabad, Telangana",
-    courseName: "Intermidiate 11th and 12th",
+    courseName: "Intermediate 11th and 12th",
   },
   {
     startDate: "2019",
