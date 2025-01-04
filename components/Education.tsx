@@ -12,7 +12,7 @@ interface EducationItem {
 const EducationData: EducationItem[] = [
   {
     startDate: "September 2022",
-    endDate: "March 2026",
+    endDate: "March 2026 [PRESENT: 3rd year]",
     collegeName: "VIT - Vellore",
     courseName: "BTech. in Computer Science and Engineering",
     address: "Vellore, Tamil Nadu",

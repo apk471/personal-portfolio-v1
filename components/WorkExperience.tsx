@@ -28,6 +28,7 @@ const workExperienceData: WorkExperienceItem[] = [
     description: [
       "Helped the club organize a hackathon for 300+ college students also made the main website for the club",
     ],
+    companyLink: "https://google.com/"
   },
   {
     startDate: "September 2024",
@@ -63,33 +64,37 @@ const WorkExperience: React.FC = () => {
             <div className="mb-4 text-base font-normal text-gray-700 dark:text-gray-400">
               <ul>
                 {item.description.map((desc, index) => (
-                  <li key={index}>{desc}</li>
+                  <li key={index}>
+                    
+                    
+                    
+                    {desc}
+                    {item.companyLink && index === 1 && ( // Add the SVG for the TAM - AIML Club description
+                      <a
+                        href={item.companyLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary hover:underline"
+                      >
+                        link
+                      </a>
+                    )}
+                    
+                    
+                    
+                    </li>
                 ))}
               </ul>
             </div>
-            {item.companyLink && (
+            {/* //TODO: Add link for TAM */}
+            {/* {item.companyLink && (
               <a
                 href={item.companyLink}
                 className="inline-flex items-center rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:text-blue-700 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
               >
-                Learn more{" "}
-                <svg
-                  className="ms-2 h-3 w-3 rtl:rotate-180"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 14 10"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M1 5h12m0 0L9 1m4 4L9 9"
-                  />
-                </svg>
+               Link
               </a>
-            )}
+            )} */}
           </li>
         ))}
       </ol>
