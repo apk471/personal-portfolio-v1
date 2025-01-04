@@ -25,7 +25,7 @@ export default function Home() {
       <Skills />
       <Projects />
       <ContactForm />
-      <Meteors number={20} />
+      {/* <Meteors number={20} /> */}
     </main>
   );
 }

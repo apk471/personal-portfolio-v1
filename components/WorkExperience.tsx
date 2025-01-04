@@ -17,7 +17,7 @@ const workExperienceData: WorkExperienceItem[] = [
     companyName: "Pyro Holdings Pvt Ltd",
     jobTitle: "Trainee Intern, SDE Department",
     description: [
-      "Contributed to the development of a RAG (Retrieval-Augmented Generation) application",
+      "Contributed to the development of a RAG (Retrieval-Augmented Generation) application.",
     ],
   },
   {
@@ -26,7 +26,7 @@ const workExperienceData: WorkExperienceItem[] = [
     companyName: "TAM - AIML Club",
     jobTitle: "AIML Club Member - Tech Volunteer",
     description: [
-      "Helped the club organize a hackathon for 300+ college students also made the main website for the club",
+      "Helped the club organize a hackathon for 300+ college students. Also made the main website for the club.",
     ],
     companyLink: "https://google.com/"
   },
@@ -36,7 +36,7 @@ const workExperienceData: WorkExperienceItem[] = [
     companyName: "Gravitas: Tech Fest",
     jobTitle: "Coordinator - Documentation Team",
     description: [
-      "Was a part of documentation team for our college technical fest and helped manage various documentation of different events during the fest",
+      "Was a part of the documentation team for the college technical fest and helped manage various documentation of different events during the fest.",
     ],
   },
 ];

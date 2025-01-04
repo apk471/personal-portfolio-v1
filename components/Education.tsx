@@ -12,24 +12,23 @@ interface EducationItem {
 const EducationData: EducationItem[] = [
   {
     startDate: "September 2022",
-    endDate: "March 2026 [PRESENT: 3rd year]",
-    collegeName: "VIT - Vellore",
+    collegeName: "at VIT - Vellore",
     courseName: "BTech. in Computer Science and Engineering",
     address: "Vellore, Tamil Nadu",
   },
   {
     startDate: "2020",
     endDate: "2022",
-    schoolName: "Sri Chaitanya Jr Kalasala",
+    schoolName: "at Sri Chaitanya Jr Kalasala",
     address: "Hyderabad, Telangana",
-    courseName: "Intermediate 11th and 12th",
+    courseName: "Intermediate 11th and 12th under TSBIE",
   },
   {
     startDate: "2019",
     endDate: "2020",
-    schoolName: "Bharatiya Vidya Bhavan A Ramarao",
+    schoolName: "Bharatiya Vidya Bhavan A Ramarao School",
     address: "Hyderabad, Telangana",
-    courseName: "Schooling till 10th",
+    courseName: "Graduated 10th class in CBSE board from",
   },
 ];
 
@@ -48,10 +47,10 @@ const Education: React.FC = () => {
           >
             <div className="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border border-white bg-gray-200 dark:border-gray-900 dark:bg-gray-700"></div>
             <time className="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-              {item.startDate} - {item.endDate || "Present"}
+              {item.startDate} - {item.endDate || "Present 3rd year"}
             </time>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              {item.courseName} at {item.collegeName || item.schoolName}
+              {item.courseName}  {item.collegeName || item.schoolName}
             </h3>
             <p className="text-sm text-gray-500 dark:text-gray-400">
               {item.address}
