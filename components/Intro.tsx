@@ -7,10 +7,10 @@ export default function Intro() {
       <div className="flex w-full flex-col gap-2 lg:w-4/5">
         <h1 className="mb-4 text-4xl font-bold">Hi! I&apos;m Ayush Amin.</h1>
         <p className="text-base text-gray-800 dark:text-gray-300">
-          I am currently pursuing a B.Tech
-          degree with a major in Computer Science at VIT University&apos;s Vellore
-          campus. My focus lies in enhancing my technical skills, particularly
-          in  Python, Web Development and Generative AI.
+          I am currently pursuing a B.Tech degree with a major in Computer
+          Science at VIT University&apos;s Vellore campus. My focus lies in
+          enhancing my technical skills, particularly in Python, Generative AI,
+          Machine Learning and Web Development .
         </p>
       </div>
       <div className="flex items-center justify-center md:mb-0">

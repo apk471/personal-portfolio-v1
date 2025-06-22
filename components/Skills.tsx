@@ -19,7 +19,7 @@ const skillsData = [
   "AWS",
   "Python",
   "FastAPI",
-  "RESTful APIs",
+  "REST APIs",
   "Langchain",
   "RAG Apps",
   "Supervised ML",
@@ -36,8 +36,7 @@ function Skills() {
         {skillsData.map((skill, index) => (
           <span
             key={index}
-            className="me-2 rounded bg-gray-500 px-2.5 py-0.5 text-sm font-medium text-gray-100 dark:bg-gray-700 dark:text-gray-300"
-          >
+            className="me-2 rounded bg-gray-500 px-2.5 py-0.5 text-sm font-medium text-gray-100 dark:bg-gray-700 dark:text-gray-300">
             {skill}
           </span>
         ))}

@@ -12,6 +12,15 @@ interface WorkExperienceItem {
 
 const workExperienceData: WorkExperienceItem[] = [
   {
+    startDate: "May 2025",
+    endDate: "July 2025",
+    companyName: "Accenture",
+    jobTitle: "Advanced App Engineering Analyst (AEH) Intern, ATCI Department",
+    description: [
+      "I worked on a project for Google titled Google Automation Arcade. My primary responsibilities included backend integration with testing to ensure system reliability and performance, along with the creation of functional and technical documentation to support development and QA teams.",
+    ],
+  },
+  {
     startDate: "May 2024",
     endDate: "July 2024",
     companyName: "Pyro Holdings Pvt Ltd",
@@ -28,7 +37,7 @@ const workExperienceData: WorkExperienceItem[] = [
     description: [
       "Helped the club organize a hackathon for 300+ college students. Also made the main website for the club.",
     ],
-    companyLink: "https://google.com/"
+    companyLink: "https://google.com/",
   },
   {
     startDate: "September 2024",
@@ -52,8 +61,7 @@ const WorkExperience: React.FC = () => {
             key={index}
             className={`mb-10 ms-4 ${
               index === workExperienceData.length - 1 ? "mb-0" : ""
-            }`}
-          >
+            }`}>
             <div className="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border border-white bg-gray-200 dark:border-gray-900 dark:bg-gray-700"></div>
             <time className="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
               {item.startDate} - {item.endDate || "Present"}
@@ -65,24 +73,18 @@ const WorkExperience: React.FC = () => {
               <ul>
                 {item.description.map((desc, index) => (
                   <li key={index}>
-                    
-                    
-                    
                     {desc}
-                    {item.companyLink && index === 1 && ( // Add the SVG for the TAM - AIML Club description
-                      <a
-                        href={item.companyLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-primary hover:underline"
-                      >
-                        link
-                      </a>
-                    )}
-                    
-                    
-                    
-                    </li>
+                    {item.companyLink &&
+                      index === 1 && ( // Add the SVG for the TAM - AIML Club description
+                        <a
+                          href={item.companyLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary hover:underline">
+                          link
+                        </a>
+                      )}
+                  </li>
                 ))}
               </ul>
             </div>

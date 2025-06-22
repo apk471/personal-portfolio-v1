@@ -5,6 +5,7 @@ interface EducationItem {
   endDate?: string;
   collegeName?: string;
   schoolName?: string;
+  grade?: string;
   address?: string;
   courseName: string;
 }
@@ -14,12 +15,14 @@ const EducationData: EducationItem[] = [
     startDate: "September 2022",
     collegeName: "at VIT - Vellore",
     courseName: "BTech. in Computer Science and Engineering",
+    grade: "CGPA : 9.01/10",
     address: "Vellore, Tamil Nadu",
   },
   {
     startDate: "2020",
     endDate: "2022",
     schoolName: "at Sri Chaitanya Jr Kalasala",
+    grade: "Percentage: 96%",
     address: "Hyderabad, Telangana",
     courseName: "Intermediate 11th and 12th under TSBIE",
   },
@@ -27,6 +30,7 @@ const EducationData: EducationItem[] = [
     startDate: "2019",
     endDate: "2020",
     schoolName: "Bharatiya Vidya Bhavan A Ramarao School",
+    grade: "Percentage: 90%",
     address: "Hyderabad, Telangana",
     courseName: "Graduated 10th class in CBSE board from",
   },
@@ -43,15 +47,23 @@ const Education: React.FC = () => {
             key={index}
             className={`mb-10 ms-4 ${
               index === EducationData.length - 1 ? "mb-0" : ""
-            }`}
-          >
-            <div className="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border border-white bg-gray-200 dark:border-gray-900 dark:bg-gray-700"></div>
+            }`}>
+            <div
+              className={`absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border border-white dark:border-gray-900 ${
+                index === 0
+                  ? "bg-green-500 dark:bg-green-600"
+                  : "bg-gray-200 dark:bg-gray-700"
+              }`}
+            />
             <time className="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-              {item.startDate} - {item.endDate || "Present 3rd year"}
+              {item.startDate} - {item.endDate || "Present 4th year"}
             </time>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              {item.courseName}  {item.collegeName || item.schoolName}
+              {item.courseName} {item.collegeName || item.schoolName}
             </h3>
+            <p className="text-[15px] text-gray-900 dark:text-gray-400">
+              {item?.grade}
+            </p>
             <p className="text-sm text-gray-500 dark:text-gray-400">
               {item.address}
             </p>
