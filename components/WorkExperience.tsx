@@ -12,6 +12,15 @@ interface WorkExperienceItem {
 
 const workExperienceData: WorkExperienceItem[] = [
   {
+    startDate: "Dec 2025",
+    endDate: "Currently Working",
+    companyName: "TIFIN (MyFi)",
+    jobTitle: "Automation QA and Developer Intern,",
+    description: [
+      "MyFi by TIFIN is building a next-generation investment advisory platform powered by AI, combining automation, reliability, and conversational intelligence to transform how users make financial decisions",
+    ],
+  },
+  {
     startDate: "May 2025",
     endDate: "July 2025",
     companyName: "Accenture",
@@ -62,7 +71,14 @@ const WorkExperience: React.FC = () => {
             className={`mb-10 ms-4 ${
               index === workExperienceData.length - 1 ? "mb-0" : ""
             }`}>
-            <div className="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border border-white bg-gray-200 dark:border-gray-900 dark:bg-gray-700"></div>
+            {/* Dot logic same as Education */}
+            <div
+              className={`absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border border-white dark:border-gray-900 ${
+                index === 0
+                  ? "bg-green-500 dark:bg-green-600"
+                  : "bg-gray-200 dark:bg-gray-700"
+              }`}
+            />
             <time className="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
               {item.startDate} - {item.endDate || "Present"}
             </time>
