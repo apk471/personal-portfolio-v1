@@ -33,7 +33,7 @@ const projectsData = [
   {
     title: "DocuGenie",
     description:
-      "An AI-powered chatbot that answers questions based on your uploaded PDF by using llamma3 as it LLM.",
+      "An AI-powered chatbot that answers questions from uploaded PDFs using Llama 3 as its LLM.",
     link: "https://drive.google.com/file/d/1KI1r9M6jVKRDYc2VzmoZrpF2j3EcIpCJ/view?usp=sharing",
     code: "https://github.com/apk471/DocuGenie",
     previewVideo: "/videos/DocGene.png",

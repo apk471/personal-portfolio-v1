@@ -13,6 +13,7 @@ interface EducationItem {
 const EducationData: EducationItem[] = [
   {
     startDate: "September 2022",
+    endDate: "May 2026",
     collegeName: "at VIT - Vellore",
     courseName: "BTech. in Computer Science and Engineering",
     grade: "CGPA : 9.01/10",
@@ -38,7 +39,7 @@ const EducationData: EducationItem[] = [
 
 const Education: React.FC = () => {
   return (
-    <div className="-z-10 flex w-full flex-col gap-4">
+    <div className="flex w-full flex-col gap-4">
       <h1 className="text-2xl font-bold">Education</h1>
 
       <ol className="relative border-s border-gray-200 dark:border-gray-700">

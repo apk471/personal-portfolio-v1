@@ -1,3 +1,4 @@
+import { ExternalLink } from "lucide-react";
 import React from "react";
 
 interface WorkExperienceItem {
@@ -6,16 +7,31 @@ interface WorkExperienceItem {
   companyName: string;
   companyLogo?: string;
   jobTitle: string;
+  location?: string;
   description: string[];
   companyLink?: string;
 }
 
 const workExperienceData: WorkExperienceItem[] = [
   {
+    startDate: "May 2026",
+    endDate: "Present",
+    companyName: "TIFIN",
+    jobTitle: "Software Engineer FTE",
+    location: "Bangalore, India",
+    description: [
+      "Built and fine-tuned the organization's core financial LLM powering 100% of B2B and B2C AI workflows across production services.",
+      "Developed an AI-powered Slack agent integrated with GitHub, Linear, GCS, and Codemagic MCPs, automating PR reviews, deployments, build generation, and ticket workflows.",
+      "Engineered and deployed GPU health monitoring endpoints for L40 and H100 clusters with automated failure detection and Slack-based alerting, reducing downtime response latency by 65%.",
+      "Designed an automated LLM evaluation framework using Google Cloud Scheduler to classify failures into LLM, data, or infrastructure issues with query-level diagnostics and ownership tagging.",
+      "MyFi by TIFIN",
+    ],
+  },
+  {
     startDate: "Dec 2025",
-    endDate: "Currently Working",
+    endDate: "Apr 2026",
     companyName: "TIFIN (MyFi)",
-    jobTitle: "Automation QA and Developer Intern,",
+    jobTitle: "Automation QA and Developer Intern",
     description: [
       "MyFi by TIFIN is building a next-generation investment advisory platform powered by AI, combining automation, reliability, and conversational intelligence to transform how users make financial decisions",
     ],
@@ -38,30 +54,11 @@ const workExperienceData: WorkExperienceItem[] = [
       "Contributed to the development of a RAG (Retrieval-Augmented Generation) application.",
     ],
   },
-  {
-    startDate: "December 2023",
-    endDate: "June 2024",
-    companyName: "TAM - AIML Club",
-    jobTitle: "AIML Club Member - Tech Volunteer",
-    description: [
-      "Helped the club organize a hackathon for 300+ college students. Also made the main website for the club.",
-    ],
-    companyLink: "https://google.com/",
-  },
-  {
-    startDate: "September 2024",
-    endDate: "Oct 2024",
-    companyName: "Gravitas: Tech Fest",
-    jobTitle: "Coordinator - Documentation Team",
-    description: [
-      "Was a part of the documentation team for the college technical fest and helped manage various documentation of different events during the fest.",
-    ],
-  },
 ];
 
 const WorkExperience: React.FC = () => {
   return (
-    <div className="-z-10 flex w-full flex-col gap-4">
+    <div className="flex w-full flex-col gap-4">
       <h1 className="text-2xl font-bold">Work Experience</h1>
 
       <ol className="relative border-s border-gray-200 dark:border-gray-700">
@@ -85,24 +82,27 @@ const WorkExperience: React.FC = () => {
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               {item.jobTitle} at {item.companyName}
             </h3>
+            {item.location && (
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {item.location}
+              </p>
+            )}
             <div className="mb-4 text-base font-normal text-gray-700 dark:text-gray-400">
-              <ul>
+              <ul className="list-disc space-y-1 ps-5">
                 {item.description.map((desc, index) => (
-                  <li key={index}>
-                    {desc}
-                    {item.companyLink &&
-                      index === 1 && ( // Add the SVG for the TAM - AIML Club description
-                        <a
-                          href={item.companyLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-primary hover:underline">
-                          link
-                        </a>
-                      )}
-                  </li>
+                  <li key={index}>{desc}</li>
                 ))}
               </ul>
+              {item.companyLink && (
+                <a
+                  href={item.companyLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-blue-600 underline underline-offset-4 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
+                  Visit website
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </a>
+              )}
             </div>
             {/* //TODO: Add link for TAM */}
             {/* {item.companyLink && (
