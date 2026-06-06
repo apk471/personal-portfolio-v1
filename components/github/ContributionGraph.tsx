@@ -36,7 +36,7 @@ export default function ContributionGraph({
       <div className="flex items-baseline justify-between">
         <h1 className="text-2xl font-bold">Contributions</h1>
         <span className="text-sm text-gray-500 dark:text-gray-400">
-          {data.total.toLocaleString()} in the last year
+          {data.total.toLocaleString()} in {data.year}
         </span>
       </div>
 

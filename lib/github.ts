@@ -28,6 +28,7 @@ export interface ContributionWeek {
 
 export interface ContributionData {
   total: number;
+  year: number;
   weeks: ContributionWeek[];
 }
 
@@ -81,7 +82,7 @@ export interface GitHubData {
 }
 
 const PROFILE_QUERY = /* GraphQL */ `
-  query ($login: String!) {
+  query ($login: String!, $from: DateTime) {
     user(login: $login) {
       name
       login
@@ -93,6 +94,8 @@ const PROFILE_QUERY = /* GraphQL */ `
       contributionsCollection {
         totalCommitContributions
         totalPullRequestContributions
+      }
+      calendar: contributionsCollection(from: $from) {
         contributionCalendar {
           totalContributions
           weeks {
@@ -212,7 +215,14 @@ async function fetchProfileGraphQL(): Promise<{
       },
       body: JSON.stringify({
         query: PROFILE_QUERY,
-        variables: { login: GITHUB_USERNAME },
+        variables: {
+          login: GITHUB_USERNAME,
+          // Scope the contribution calendar to the current calendar year
+          // (Jan 1 → now) instead of GitHub's default rolling 12 months.
+          from: new Date(
+            Date.UTC(new Date().getUTCFullYear(), 0, 1)
+          ).toISOString(),
+        },
       }),
       signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
       next: { revalidate: REVALIDATE_SECONDS },
@@ -224,7 +234,7 @@ async function fetchProfileGraphQL(): Promise<{
     if (!user) return { profile: null, contributions: null, pinned: [], recent: [] };
 
     const cc = user.contributionsCollection;
-    const cal = cc?.contributionCalendar;
+    const cal = user.calendar?.contributionCalendar;
 
     const profile: ProfileStats = {
       name: user.name ?? null,
@@ -242,6 +252,7 @@ async function fetchProfileGraphQL(): Promise<{
     const contributions: ContributionData | null = cal
       ? {
           total: cal.totalContributions ?? 0,
+          year: new Date().getUTCFullYear(),
           weeks: (cal.weeks ?? []).map((w: any) => ({
             days: (w.contributionDays ?? []).map((d: any) => ({
               date: d.date,
