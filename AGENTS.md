@@ -1,64 +1,56 @@
-# Agent Guide
+# Agent Instructions
 
 ## Project Overview
 
-This is Ayush Amin's personal portfolio built with Next.js App Router, React, TypeScript, Tailwind CSS, shadcn-style UI primitives, lucide-react icons, and next-themes.
+This is Ayush Amin's personal portfolio built with Next.js App Router, React,
+ TypeScript, Tailwind CSS, shadcn-style UI components, Magic UI components, and
+ next-themes.
 
-The site is mostly static content with small client-side interactions for theme switching and the contact form.
+The portfolio should present Ayush as a backend and AI engineer. Content changes
+ should preserve that positioning and avoid drifting toward a generic student or
+ frontend-only profile.
 
-## Key Paths
+## Common Commands
 
-- `app/page.tsx`: main portfolio layout and section order.
-- `app/layout.tsx`: metadata, fonts, and global providers.
-- `app/globals.css`: Tailwind layers and small custom utilities.
-- `components/Intro.tsx`: hero/profile introduction.
-- `components/WorkExperience.tsx`: timeline-style professional experience.
-- `components/Education.tsx`: education timeline.
-- `components/Skills.tsx`: skill tags.
-- `components/Projects.tsx`: static project cards.
-- `components/ContactForm.tsx`: Web3Forms-powered contact form.
-- `components/CustomDock.tsx`: floating navigation, social links, and theme toggle.
-- `components/ui/*`: local UI primitives. Prefer reusing these before adding new component styles.
+- Install dependencies: `npm install`
+- Start local development: `npm run dev`
+- Run lint: `npm run lint`
+- Run production build: `npm run build`
 
-## Commands
+## Code Style
 
-- `npm run dev`: start the local Next.js dev server.
-- `npm run lint`: run Next.js linting.
-- `npm run build`: run production build and type checks.
+- Keep components small and readable.
+- Prefer existing local UI components from `components/ui`.
+- Prefer Tailwind utility classes over custom CSS unless the style is shared or
+ complex.
+- Use `next/image` for local images.
+- Use `next/link` for navigation links.
+- Use `lucide-react` icons when a suitable icon exists.
+- Keep content data close to the section component unless it grows large enough
+ to justify moving into a shared data file.
 
-Run `npm run lint` and `npm run build` before considering code changes complete.
+## Portfolio Content Rules
 
-## Implementation Notes
+- Intro copy should emphasize backend systems, AI/LLM engineering, automation,
+ observability, cloud infrastructure, and developer tooling.
+- Work experience should be reverse chronological.
+- Current roles should appear first and use the active timeline dot.
+- External links must be visually obvious in both light and dark mode.
+- Avoid placeholder or copied third-party content. If a section has no real
+ content yet, render nothing or add real owner-specific data.
 
-- Keep portfolio content in the component data arrays unless a broader data abstraction is needed.
-- Use TypeScript types for structured portfolio data.
-- Prefer Tailwind classes already used in the repo.
-- Use `lucide-react` for common icons.
-- Keep UI compact and readable; this portfolio should feel professional and backend/AI focused, not like a marketing landing page.
-- Do not add unrelated visual effects or large layout rewrites when editing content.
+## Frontend Expectations
 
-## Content Guidelines
+- Test both light and dark mode after visual changes.
+- Check mobile and desktop layouts when editing the dock, cards, timeline, or
+ contact form.
+- Do not use negative z-index on main content sections because it can interfere
+ with selection and click behavior.
+- Buttons and links should have a clear clickable area, not only icon-level click
+ handlers.
 
-- Intro copy should position Ayush around backend engineering, AI systems, LLM workflows, automation, and production reliability.
-- Work experience should remain reverse-chronological.
-- Project copy should be concise, outcome-focused, and technically specific.
-- Avoid copied placeholder content from templates or other creators.
+## Git And Review
 
-## Environment
-
-The contact form expects:
-
-```bash
-NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=
-```
-
-If the key is missing, the UI should show a clear fallback message directing visitors to email directly.
-
-## GitHub Integration Direction
-
-Future GitHub integration should be server-side where possible:
-
-- Use a server-only `GITHUB_TOKEN`, never a `NEXT_PUBLIC_*` token.
-- Put GitHub fetch helpers in `lib/github.ts`.
-- Cache GitHub requests with Next.js revalidation to avoid rate-limit issues.
-- Show recent projects, active repositories, contribution stats, and streak information in a dedicated section.
+- Keep unrelated changes out of commits.
+- Prefer one focused commit per bug fix or content update.
+- Before opening a PR, run `npm run lint` and `npm run build`.
