@@ -10,10 +10,17 @@ const ContactForm = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error' | 'missing-config'>('idle');
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+
+    if (!accessKey) {
+      setSubmitStatus('missing-config');
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
@@ -25,7 +32,7 @@ const ContactForm = () => {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
+          access_key: accessKey,
           name,
           email,
           message,
@@ -98,6 +105,9 @@ const ContactForm = () => {
         {submitStatus === 'error' && (
           <p className="text-red-600">There was an error sending your message. Please try again.</p>
         )}
+        {submitStatus === 'missing-config' && (
+          <p className="text-red-600">Contact form is not configured yet. Please email me directly instead.</p>
+        )}
       </form>
 
       <div className="mt-7 text-center">
@@ -114,4 +124,3 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
-
