@@ -104,11 +104,11 @@ function RepoCard({ repo }: { repo: Repo }) {
           </span>
         )}
         {repo.homepageUrl && (
-          <Link href={repo.homepageUrl} target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" size="sm" className="gap-1">
+          <Button asChild variant="outline" size="sm" className="gap-1">
+            <Link href={repo.homepageUrl} target="_blank" rel="noopener noreferrer">
               Live <ExternalLink className="h-3.5 w-3.5" />
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         )}
       </div>
     </div>

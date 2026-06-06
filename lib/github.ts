@@ -13,6 +13,8 @@ const GRAPHQL_ENDPOINT = "https://api.github.com/graphql";
 const REST_BASE = "https://api.github.com";
 // Revalidate every hour so GitHub is hit at most once/hour, not per visitor.
 const REVALIDATE_SECONDS = 3600;
+// Bound each outbound request so a network stall can't block render/ISR.
+const REQUEST_TIMEOUT_MS = 10_000;
 
 export interface ContributionDay {
   date: string;
@@ -166,8 +168,17 @@ function mapRepo(node: any): Repo {
 }
 
 function aggregateLanguages(repos: Repo[]): LanguageSlice[] {
+  // Pinned and recent lists can overlap; dedupe by repo URL so a repo in both
+  // doesn't double-count its language bytes and skew the breakdown.
+  const seen = new Set<string>();
+  const uniqueRepos = repos.filter((repo) => {
+    if (seen.has(repo.url)) return false;
+    seen.add(repo.url);
+    return true;
+  });
+
   const totals = new Map<string, { color: string | null; size: number }>();
-  for (const repo of repos) {
+  for (const repo of uniqueRepos) {
     for (const lang of repo.languages) {
       const existing = totals.get(lang.name);
       if (existing) {
@@ -203,6 +214,7 @@ async function fetchProfileGraphQL(): Promise<{
         query: PROFILE_QUERY,
         variables: { login: GITHUB_USERNAME },
       }),
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
       next: { revalidate: REVALIDATE_SECONDS },
     });
     if (!res.ok) return { profile: null, contributions: null, pinned: [], recent: [] };
@@ -301,6 +313,7 @@ async function fetchEvents(): Promise<ActivityEvent[]> {
           Accept: "application/vnd.github+json",
           ...(GITHUB_TOKEN ? { Authorization: `Bearer ${GITHUB_TOKEN}` } : {}),
         },
+        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
         next: { revalidate: REVALIDATE_SECONDS },
       }
     );

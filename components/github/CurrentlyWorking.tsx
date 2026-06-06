@@ -22,7 +22,11 @@ export default function CurrentlyWorking({ repos }: { repos: Repo[] }) {
               <div className="flex min-w-0 flex-col gap-1">
                 <span className="inline-flex items-center gap-1.5 font-semibold">
                   {repo.name}
-                  <ArrowUpRight className="h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100" />
+                  <ArrowUpRight
+                    aria-hidden="true"
+                    className="h-4 w-4 opacity-60 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+                  />
+                  <span className="sr-only">(opens in a new tab)</span>
                 </span>
                 {repo.description && (
                   <span className="truncate text-sm text-gray-500 dark:text-gray-400">
