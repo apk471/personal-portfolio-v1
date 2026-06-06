@@ -49,8 +49,37 @@ with selection and click behavior.
 - Buttons and links should have a clear clickable area, not only icon-level click
 handlers.
 
+## GitHub Integration
+
+- The homepage pulls live GitHub data (contribution heatmap, pinned repos,
+  recently-pushed repos, stats, language bar, activity feed) via the server-side
+  data layer in `lib/github.ts`.
+- It requires a `GITHUB_TOKEN` env var (a read-only / public-data PAT) in
+  `.env.local` locally and in the Vercel project's env vars (Production +
+  Preview). `GITHUB_USERNAME` is optional and defaults to `apk471`.
+- The token is read on the server only — never expose it client-side.
+- All fetchers fail soft: with no token or on API error they return null/empty
+  and the UI degrades gracefully (static fallback projects + activity feed).
+  Keep this behavior when editing the data layer.
+- The page uses hourly ISR (`export const revalidate = 3600` in `app/page.tsx`)
+  so GitHub is hit at most once per hour, not per visitor.
+- The contribution heatmap is scoped to the current calendar year via a
+  dynamically-computed `from` date; keep it year-scoped, not rolling-12-months.
+
 ## Git And Review
 
+- Work on short-lived feature branches and open PRs; do not commit to `main`.
+  Ayush merges PRs himself.
 - Keep unrelated changes out of commits.
 - Prefer one focused commit per bug fix or content update.
 - Before opening a PR, run `npm run lint` and `npm run build`.
+
+## Releases
+
+- Releases are tag-triggered. Pushing a `v*` tag runs
+  `.github/workflows/release.yml`, which publishes a GitHub Release with
+  auto-generated notes (uses the built-in `gh` CLI; no third-party actions).
+- To cut a release: bump `version` in `package.json`, merge that, then
+  `git tag vX.Y.Z && git push origin vX.Y.Z`.
+- Use semver: patch for bugfixes, minor for backwards-compatible features,
+  major for breaking changes/redesigns. First release was `v1.0.0`.
