@@ -54,25 +54,6 @@ const workExperienceData: WorkExperienceItem[] = [
       "Contributed to the development of a RAG (Retrieval-Augmented Generation) application.",
     ],
   },
-  {
-    startDate: "December 2023",
-    endDate: "June 2024",
-    companyName: "TAM - AIML Club",
-    jobTitle: "AIML Club Member - Tech Volunteer",
-    description: [
-      "Helped the club organize a hackathon for 300+ college students. Also made the main website for the club.",
-    ],
-    companyLink: "https://google.com/",
-  },
-  {
-    startDate: "September 2024",
-    endDate: "Oct 2024",
-    companyName: "Gravitas: Tech Fest",
-    jobTitle: "Coordinator - Documentation Team",
-    description: [
-      "Was a part of the documentation team for the college technical fest and helped manage various documentation of different events during the fest.",
-    ],
-  },
 ];
 
 const WorkExperience: React.FC = () => {
