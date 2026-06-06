@@ -164,17 +164,14 @@ export function CustomDock() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="flex size-12 items-center justify-center rounded-full">
+                  className="flex size-12 items-center justify-center rounded-full"
+                  onClick={() =>
+                    setTheme(resolvedTheme === "light" ? "dark" : "light")
+                  }>
                   {resolvedTheme === "light" ? (
-                    <Moon
-                      className="h-[1.2rem] w-[1.2rem]"
-                      onClick={() => setTheme("dark")}
-                    />
+                    <Moon className="h-[1.2rem] w-[1.2rem]" />
                   ) : (
-                    <Sun
-                      className="h-[1.2rem] w-[1.2rem]"
-                      onClick={() => setTheme("light")}
-                    />
+                    <Sun className="h-[1.2rem] w-[1.2rem]" />
                   )}
                   <span className="sr-only">Toggle theme</span>
                 </Button>
