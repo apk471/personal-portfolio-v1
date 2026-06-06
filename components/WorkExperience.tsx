@@ -7,16 +7,31 @@ interface WorkExperienceItem {
   companyName: string;
   companyLogo?: string;
   jobTitle: string;
+  location?: string;
   description: string[];
   companyLink?: string;
 }
 
 const workExperienceData: WorkExperienceItem[] = [
   {
+    startDate: "May 2026",
+    endDate: "Present",
+    companyName: "TIFIN",
+    jobTitle: "Software Engineer FTE",
+    location: "Bangalore, India",
+    description: [
+      "Built and fine-tuned the organization's core financial LLM powering 100% of B2B and B2C AI workflows across production services.",
+      "Developed an AI-powered Slack agent integrated with GitHub, Linear, GCS, and Codemagic MCPs, automating PR reviews, deployments, build generation, and ticket workflows.",
+      "Engineered and deployed GPU health monitoring endpoints for L40 and H100 clusters with automated failure detection and Slack-based alerting, reducing downtime response latency by 65%.",
+      "Designed an automated LLM evaluation framework using Google Cloud Scheduler to classify failures into LLM, data, or infrastructure issues with query-level diagnostics and ownership tagging.",
+      "MyFi by TIFIN",
+    ],
+  },
+  {
     startDate: "Dec 2025",
-    endDate: "Currently Working",
+    endDate: "Apr 2026",
     companyName: "TIFIN (MyFi)",
-    jobTitle: "Automation QA and Developer Intern,",
+    jobTitle: "Automation QA and Developer Intern",
     description: [
       "MyFi by TIFIN is building a next-generation investment advisory platform powered by AI, combining automation, reliability, and conversational intelligence to transform how users make financial decisions",
     ],
@@ -86,8 +101,13 @@ const WorkExperience: React.FC = () => {
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               {item.jobTitle} at {item.companyName}
             </h3>
+            {item.location && (
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {item.location}
+              </p>
+            )}
             <div className="mb-4 text-base font-normal text-gray-700 dark:text-gray-400">
-              <ul>
+              <ul className="list-disc space-y-1 ps-5">
                 {item.description.map((desc, index) => (
                   <li key={index}>{desc}</li>
                 ))}
