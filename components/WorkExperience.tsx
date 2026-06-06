@@ -90,8 +90,9 @@ const WorkExperience: React.FC = () => {
                 {item.description.map((desc, index) => (
                   <li key={index}>
                     {desc}
-                    {item.companyLink &&
-                      index === 1 && ( // Add the SVG for the TAM - AIML Club description
+                    {item.companyLink && (
+                      <>
+                        {" "}
                         <a
                           href={item.companyLink}
                           target="_blank"
@@ -99,7 +100,8 @@ const WorkExperience: React.FC = () => {
                           className="text-primary hover:underline">
                           link
                         </a>
-                      )}
+                      </>
+                    )}
                   </li>
                 ))}
               </ul>
