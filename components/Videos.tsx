@@ -3,33 +3,25 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import { BsYoutube } from "react-icons/bs";
 
-const videos = [
-  {
-    title: "Build Dribble Clone using Next.js, Appwrite, TailwindCSS",
-    description:
-      "In this video, I will be taking you through the complete process of building a Dribble Clone using Next.js, Appwrite, TailwindCSS.",
-    videoId: "isFg0IRlNq4",
-  },
-  {
-    title: "Complete Guide to Build Rest APIs for Authentication from Scratch",
-    description:
-      "In this video, I will be taking you through the complete process of building a Rest API for Authentication from scratch.",
-    videoId: "osLnmm5tJT4",
-  },
-  {
-    title: "Build Facebook Reaction Animation using React and Framer Motion",
-    description:
-      "In this video, I will be taking you through the complete process of building a Facebook Reaction Animation using React and Framer Motion.",
-    videoId: "_db5IFxEWLo",
-  },
-];
+type Video = {
+  title: string;
+  description: string;
+  videoId: string;
+};
+
+const videos: Video[] = [];
+const youtubeUrl = "https://www.youtube.com/";
 
 function Videos() {
+  if (videos.length === 0) {
+    return null;
+  }
+
   return (
     <div className="flex flex-col gap-4 w-full">
       <div className="flex flex-row justify-between items-center">
         <h1 className="text-2xl font-bold">Videos</h1>
-        <Link href="https://www.youtube.com/c/YatharthVerma" target="_blank">
+        <Link href={youtubeUrl} target="_blank">
           <Button variant="outline" className="w-fit">
             YouTube
             <BsYoutube className="w-4 h-4 ml-2" />
