@@ -1,3 +1,4 @@
+import { ExternalLink } from "lucide-react";
 import React from "react";
 
 interface WorkExperienceItem {
@@ -88,23 +89,19 @@ const WorkExperience: React.FC = () => {
             <div className="mb-4 text-base font-normal text-gray-700 dark:text-gray-400">
               <ul>
                 {item.description.map((desc, index) => (
-                  <li key={index}>
-                    {desc}
-                    {item.companyLink && (
-                      <>
-                        {" "}
-                        <a
-                          href={item.companyLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-primary hover:underline">
-                          link
-                        </a>
-                      </>
-                    )}
-                  </li>
+                  <li key={index}>{desc}</li>
                 ))}
               </ul>
+              {item.companyLink && (
+                <a
+                  href={item.companyLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-blue-600 underline underline-offset-4 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
+                  Visit website
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </a>
+              )}
             </div>
             {/* //TODO: Add link for TAM */}
             {/* {item.companyLink && (
