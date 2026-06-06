@@ -13,6 +13,7 @@ interface EducationItem {
 const EducationData: EducationItem[] = [
   {
     startDate: "September 2022",
+    endDate: "May 2026",
     collegeName: "at VIT - Vellore",
     courseName: "BTech. in Computer Science and Engineering",
     grade: "CGPA : 9.01/10",
