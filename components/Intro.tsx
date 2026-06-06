@@ -3,7 +3,7 @@ import ProfilePic from "@/app/images/ayush.png";
 
 export default function Intro() {
   return (
-    <div className="-z-10 flex w-full flex-col-reverse items-center justify-between gap-14 lg:flex-row">
+    <div className="flex w-full flex-col-reverse items-center justify-between gap-14 lg:flex-row">
       <div className="flex w-full flex-col gap-2 lg:w-4/5">
         <h1 className="mb-4 text-4xl font-bold">Hi! I&apos;m Ayush Amin.</h1>
         <p className="text-base text-gray-800 dark:text-gray-300">

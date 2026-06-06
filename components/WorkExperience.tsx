@@ -61,7 +61,7 @@ const workExperienceData: WorkExperienceItem[] = [
 
 const WorkExperience: React.FC = () => {
   return (
-    <div className="-z-10 flex w-full flex-col gap-4">
+    <div className="flex w-full flex-col gap-4">
       <h1 className="text-2xl font-bold">Work Experience</h1>
 
       <ol className="relative border-s border-gray-200 dark:border-gray-700">
