@@ -11,7 +11,7 @@ const fallbackRepos: Repo[] = [
     name: "FoundersHub",
     description:
       "Platform where entrepreneurs submit startup ideas for virtual pitch competitions, browse other pitches, and gain exposure.",
-    url: "https://github.com/apk471/FoundersHub",
+    url: "https://github.com/ayush-amin/FoundersHub",
     homepageUrl: "https://founders-hub-new.vercel.app/",
     primaryLanguage: { name: "TypeScript", color: "#3178c6" },
     forkCount: 0,
@@ -22,7 +22,7 @@ const fallbackRepos: Repo[] = [
     name: "ChatApp",
     description:
       "Modern real-time messaging application with sockets-based live communication.",
-    url: "https://github.com/apk471/ChatApp",
+    url: "https://github.com/ayush-amin/ChatApp",
     homepageUrl: "https://chatapp-5aj0.onrender.com/",
     primaryLanguage: { name: "JavaScript", color: "#f1e05a" },
     forkCount: 0,
@@ -33,7 +33,7 @@ const fallbackRepos: Repo[] = [
     name: "DocuGenie",
     description:
       "AI-powered chatbot that answers questions from uploaded PDFs using Llama 3 as its LLM.",
-    url: "https://github.com/apk471/DocuGenie",
+    url: "https://github.com/ayush-amin/DocuGenie",
     homepageUrl: null,
     primaryLanguage: { name: "Python", color: "#3572A5" },
     forkCount: 0,
@@ -44,7 +44,7 @@ const fallbackRepos: Repo[] = [
     name: "mdps",
     description:
       "Machine-learning classifier diagnosing heart disease, Parkinson's, and diabetes.",
-    url: "https://github.com/apk471/mdps",
+    url: "https://github.com/ayush-amin/mdps",
     homepageUrl: "https://diseasesprediction.streamlit.app/",
     primaryLanguage: { name: "Python", color: "#3572A5" },
     forkCount: 0,
@@ -123,7 +123,7 @@ export default function PinnedRepos({ repos }: { repos: Repo[] }) {
       <div className="flex items-baseline justify-between">
         <h1 className="text-2xl font-bold">Projects</h1>
         <Link
-          href="https://github.com/apk471?tab=repositories"
+          href="https://github.com/ayush-amin?tab=repositories"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:underline dark:text-blue-400"

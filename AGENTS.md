@@ -56,7 +56,7 @@ handlers.
   data layer in `lib/github.ts`.
 - It requires a `GITHUB_TOKEN` env var (a read-only / public-data PAT) in
   `.env.local` locally and in the Vercel project's env vars (Production +
-  Preview). `GITHUB_USERNAME` is optional and defaults to `apk471`.
+  Preview). `GITHUB_USERNAME` is optional and defaults to `ayush-amin`.
 - The token is read on the server only — never expose it client-side.
 - All fetchers fail soft: with no token or on API error they return null/empty
   and the UI degrades gracefully (static fallback projects + activity feed).
