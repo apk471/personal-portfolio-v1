@@ -3,7 +3,9 @@
 // stats (one GraphQL call) and the public activity feed (REST). All fetchers
 // fail soft: on any error they return null so the UI can fall back gracefully.
 //
-// Requires a GITHUB_TOKEN env var (a read-only / public-data fine-grained PAT).
+// Requires a GITHUB_TOKEN env var. For orgs + private contribution counts the
+// token needs `repo`, `read:org` and `read:user` scopes (and "Include private
+// contributions on my profile" enabled). Falls back gracefully with less.
 // The token is only ever read on the server.
 
 // Default profile handle; override with the GITHUB_USERNAME env var if needed.
@@ -62,6 +64,16 @@ export interface ProfileStats {
   totalContributions: number;
   totalCommits: number;
   totalPullRequests: number;
+  // Private contributions folded into the calendar total (requires `repo` scope
+  // + "Include private contributions"). 0 when the token can't see them.
+  privateContributions: number;
+}
+
+export interface Organization {
+  login: string;
+  name: string | null;
+  avatarUrl: string;
+  url: string;
 }
 
 export interface ActivityEvent {
@@ -80,6 +92,7 @@ export interface GitHubData {
   recent: Repo[];
   events: ActivityEvent[];
   topLanguages: LanguageSlice[];
+  organizations: Organization[];
 }
 
 const PROFILE_QUERY = /* GraphQL */ `
@@ -92,11 +105,21 @@ const PROFILE_QUERY = /* GraphQL */ `
       followers { totalCount }
       following { totalCount }
       repositories(privacy: PUBLIC) { totalCount }
+      organizations(first: 12) {
+        nodes {
+          login
+          name
+          avatarUrl
+          url
+        }
+      }
       contributionsCollection {
         totalCommitContributions
         totalPullRequestContributions
+        restrictedContributionsCount
       }
       calendar: contributionsCollection(from: $from) {
+        restrictedContributionsCount
         contributionCalendar {
           totalContributions
           weeks {
@@ -203,9 +226,16 @@ async function fetchProfileGraphQL(): Promise<{
   contributions: ContributionData | null;
   pinned: Repo[];
   recent: Repo[];
+  organizations: Organization[];
 }> {
   if (!GITHUB_TOKEN) {
-    return { profile: null, contributions: null, pinned: [], recent: [] };
+    return {
+      profile: null,
+      contributions: null,
+      pinned: [],
+      recent: [],
+      organizations: [],
+    };
   }
   try {
     const res = await fetch(GRAPHQL_ENDPOINT, {
@@ -228,11 +258,13 @@ async function fetchProfileGraphQL(): Promise<{
       signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
       next: { revalidate: REVALIDATE_SECONDS },
     });
-    if (!res.ok) return { profile: null, contributions: null, pinned: [], recent: [] };
+    if (!res.ok)
+      return { profile: null, contributions: null, pinned: [], recent: [], organizations: [] };
 
     const json = await res.json();
     const user = json?.data?.user;
-    if (!user) return { profile: null, contributions: null, pinned: [], recent: [] };
+    if (!user)
+      return { profile: null, contributions: null, pinned: [], recent: [], organizations: [] };
 
     const cc = user.contributionsCollection;
     const cal = user.calendar?.contributionCalendar;
@@ -248,7 +280,17 @@ async function fetchProfileGraphQL(): Promise<{
       totalContributions: cal?.totalContributions ?? 0,
       totalCommits: cc?.totalCommitContributions ?? 0,
       totalPullRequests: cc?.totalPullRequestContributions ?? 0,
+      privateContributions: user.calendar?.restrictedContributionsCount ?? 0,
     };
+
+    const organizations: Organization[] = (user.organizations?.nodes ?? []).map(
+      (o: any) => ({
+        login: o.login,
+        name: o.name ?? null,
+        avatarUrl: o.avatarUrl,
+        url: o.url,
+      })
+    );
 
     const contributions: ContributionData | null = cal
       ? {
@@ -267,9 +309,9 @@ async function fetchProfileGraphQL(): Promise<{
     const pinned: Repo[] = (user.pinnedItems?.nodes ?? []).map(mapRepo);
     const recent: Repo[] = (user.recentRepos?.nodes ?? []).map(mapRepo);
 
-    return { profile, contributions, pinned, recent };
+    return { profile, contributions, pinned, recent, organizations };
   } catch {
-    return { profile: null, contributions: null, pinned: [], recent: [] };
+    return { profile: null, contributions: null, pinned: [], recent: [], organizations: [] };
   }
 }
 
@@ -356,5 +398,6 @@ export async function getGitHubData(): Promise<GitHubData> {
     recent: graph.recent,
     events,
     topLanguages,
+    organizations: graph.organizations,
   };
 }
