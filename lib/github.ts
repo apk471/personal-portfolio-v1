@@ -6,7 +6,7 @@
 // Requires a GITHUB_TOKEN env var (a read-only / public-data fine-grained PAT).
 // The token is only ever read on the server.
 
-export const GITHUB_USERNAME = process.env.GITHUB_USERNAME || "apk471";
+export const GITHUB_USERNAME = process.env.GITHUB_USERNAME || "ayush-amin";
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GRAPHQL_ENDPOINT = "https://api.github.com/graphql";

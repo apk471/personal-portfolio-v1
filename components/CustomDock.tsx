@@ -72,7 +72,7 @@ const DATA = {
     social: {
       GitHub: {
         name: "GitHub",
-        url: "https://github.com/apk471",
+        url: "https://github.com/ayush-amin",
         icon: Icons.github,
       },
       LinkedIn: {
