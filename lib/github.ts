@@ -6,6 +6,7 @@
 // Requires a GITHUB_TOKEN env var (a read-only / public-data fine-grained PAT).
 // The token is only ever read on the server.
 
+// Default profile handle; override with the GITHUB_USERNAME env var if needed.
 export const GITHUB_USERNAME = process.env.GITHUB_USERNAME || "ayush-amin";
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
