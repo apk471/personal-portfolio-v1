@@ -8,6 +8,7 @@ import ContributionGraph from "@/components/github/ContributionGraph";
 import PinnedRepos from "@/components/github/PinnedRepos";
 import CurrentlyWorking from "@/components/github/CurrentlyWorking";
 import GitHubStats from "@/components/github/GitHubStats";
+import Organizations from "@/components/github/Organizations";
 import ContactForm from "@/components/ContactForm";
 import { getGitHubData } from "@/lib/github";
 
@@ -36,6 +37,7 @@ export default async function Home() {
         topLanguages={github.topLanguages}
         events={github.events}
       />
+      <Organizations organizations={github.organizations} />
       <PinnedRepos repos={github.pinned} />
       <CurrentlyWorking repos={github.recent} />
       <ContactForm />
